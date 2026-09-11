@@ -1,6 +1,8 @@
-import requests
-from bs4 import BeautifulSoup
+from selenium import webdriver 
 
-res = requests.get("https://www.geeksforgeeks.org/python/python-web-scraping-tutorial/")
-soup = BeautifulSoup(res.content, 'html.parser')
-print(soup.prettify())
+options = webdriver.FirefoxOptions()
+options.add_argument("--headless")
+
+driver = webdriver.Firefox() 
+driver.get("https://www.tcgplayer.com/")
+print(driver)
