@@ -28,8 +28,10 @@ def scrapeCardUrl(cardUrl):
     else:
         jFile = {
             "name": name.text,
-            "price": price.text,
-            "avgDailySold": avgDailySold.text
+            "cardInfo": {
+                        "price": price.text,
+                        "avgDailySold": avgDailySold.text
+                        }
         }
         json_str = json.dumps(jFile, indent=3)
         with open("sample.json", "w") as f:         
