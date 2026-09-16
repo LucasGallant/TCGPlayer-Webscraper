@@ -1,3 +1,6 @@
-import scraper
+import scrapeCards
+import scrapeWeb
 
-scraper.scrapeCardUrl("https://www.tcgplayer.com/product/714707/yugioh-magnificent-monsters-favorite-hero-shining-flare-wingman?page=1&Language=English")
+urls = scrapeWeb.scrapeFrontPage("https://www.tcgplayer.com/search/yugioh/product?productLineName=yugioh&page=1&view=grid")
+for link in urls:
+    scrapeCards.scrapeCardUrl(link)  

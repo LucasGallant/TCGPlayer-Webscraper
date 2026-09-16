@@ -19,25 +19,28 @@ def scrapeCardUrl(cardUrl):
     driver.get(url)
 
     try: 
+        # have to use WebDriverWait or else it will return null
         name = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, nameXPATH)))
         price = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, priceXPATH)))
         avgDailySold = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, avgDailySoldXPATH)))
+    # exception if no element was found for any of them
+    #NEEDS TO BE CHANGED TO CHECK INDIVIDUAL
     except NoSuchElementException:
         print("Not Found")
         driver.quit()
     else:
-        jFile = {
-            "name": name.text,
-            "cardInfo": {
-                        "price": price.text,
-                        "avgDailySold": avgDailySold.text
-                        }
-        }
-        json_str = json.dumps(jFile, indent=3)
-        with open("sample.json", "w") as f:         
-            f.write(json_str)
-        # print("Found")
-        # print("Card Name: ", name.text)
-        # print("Card Price: ", price.text)
-        # print("Avg. Daily Sold: ", avgDailySold.text)
+        # jFile = {
+        #     "name": name.text,
+        #     "cardInfo": {
+        #                 "price": price.text,
+        #                 "avgDailySold": avgDailySold.text
+        #                 }
+        # }
+        # json_str = json.dumps(jFile, indent=3)
+        # with open("sample.json", "w") as f:         
+        #     f.write(json_str)
+        print("Found")
+        print("Card Name: ", name.text)
+        print("Card Price: ", price.text)
+        print("Avg. Daily Sold: ", avgDailySold.text)
         driver.quit()
