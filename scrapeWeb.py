@@ -11,10 +11,8 @@ cardUrlCSS = "html body div#app.app-container div div.marketplace section.market
 options = webdriver.FirefoxOptions()
 options.add_argument("--headless")
 
-def scrapeFrontPage(pageUrl):
-    url = pageUrl
-
-    driver = webdriver.Firefox() 
+def scrapeFrontPage(url):
+    driver = webdriver.Firefox(options=options) 
     driver.get(url)
 
     try: 
