@@ -1,6 +1,5 @@
 import scrapeCards
 import scrapeWeb
 
-urls = scrapeWeb.scrapeFrontPage("https://www.tcgplayer.com/search/yugioh/product?productLineName=yugioh&page=1&view=grid")
-for link in urls:
-    scrapeCards.scrapeCardUrl(link)  
+urls = scrapeWeb.scrapeFrontPage("https://www.tcgplayer.com/search/magic/product?productLineName=magic&page=1&view=grid")
+print(urls)
