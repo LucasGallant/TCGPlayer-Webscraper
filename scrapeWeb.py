@@ -30,16 +30,6 @@ def scrapeFrontPage(url):
         print("Not Found")
         driver.quit()
     else:
-        # jFile = {
-        #     "name": name.text,
-        #     "cardInfo": {
-        #                 "price": price.text,
-        #                 "avgDailySold": avgDailySold.text
-        #                 }
-        # }
-        # json_str = json.dumps(jFile, indent=3)
-        # with open("sample.json", "w") as f:         
-        #     f.write(json_str)
         print("Found")
         driver.quit()
         return urls
