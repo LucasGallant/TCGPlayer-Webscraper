@@ -22,11 +22,12 @@ def scrapeCardUrl(url):
     try: 
         # have to use WebDriverWait or else it will return null
         #Maybe Faster?
-        WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, nameXPATH)))
-        name = driver.find_element(By.XPATH, nameXPATH)
+        name = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, nameXPATH)))
+        # name = driver.find_element(By.XPATH, nameXPATH)
         price = driver.find_element(By.XPATH, priceXPATH)
         avgDailySold = driver.find_element(By.XPATH, avgDailySoldXPATH)
         setName = driver.find_element(By.XPATH, setNameXPATH)
+        
     # exception if no element was found for any of them
     #NEEDS TO BE CHANGED TO CHECK INDIVIDUAL
     except NoSuchElementException:
