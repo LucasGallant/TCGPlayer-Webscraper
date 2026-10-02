@@ -32,25 +32,25 @@ def scrapeCardUrl(url):
         print("Not Found")
         driver.quit()
     else:
-        document = Path.home()
-        filePath = document
-        jFile = {
-            "name": name.text,
-            "price": price.text,
-            "avgDailySold": avgDailySold.text,
-            "set": setName.text,
-            "url": url
-        }
-        with open(filePath, "w") as f:         
-            json.dump(jFile, f)
-        # if not (name == None or price == None or avgDailySold == None or setName == None):
-        #     print("--------------------------------------------------------------------------------------")
-        #     print("Card Name: ", name.text)
-        #     print("Card Price: ", price.text)
-        #     print("Avg. Daily Sold: ", avgDailySold.text)
-        #     print("Set: ", setName.text)
-        #     print("Url: ", url)
-        # else:
-        #     print("Null Value")
+        # document = Path.home()
+        # filePath = document
+        # jFile = {
+        #     "name": name.text,
+        #     "price": price.text,
+        #     "avgDailySold": avgDailySold.text,
+        #     "set": setName.text,
+        #     "url": url
+        # }
+        # with open(filePath, "w") as f:         
+        #     json.dump(jFile, f)
+        if not (name == None or price == None or avgDailySold == None or setName == None):
+            print("--------------------------------------------------------------------------------------")
+            print("Card Name: ", name.text)
+            print("Card Price: ", price.text)
+            print("Avg. Daily Sold: ", avgDailySold.text)
+            print("Set: ", setName.text)
+            print("Url: ", url)
+        else:
+            print("Null Value")
 
         driver.quit()
