@@ -1,3 +1,4 @@
+import cardDatabase
 from selenium import webdriver 
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
@@ -30,17 +31,13 @@ def scrapeCardUrl(url, driver):
         print("Not Found")
     else:
         if not (name == None or price == None or avgDailySold == None or setName == None):
-            print("--------------------------------------------------------------------------------------")
-            print("Card Name: ", name.text)
-            print("Card Price: ", price.text)
-            print("Avg. Daily Sold: ", avgDailySold.text)
-            print("Set: ", setName.text)
-            print("Url: ", url)
+            cardDatabase.databaseInsert(name.text, price.text, avgDailySold.text, setName.text, url)
+            cardDatabase.dataGet()
         else:
             print("Null Value")
 
 def startScrape(urls):
-    driver = webdriver.Firefox()
+    driver = webdriver.Firefox(options=options)
     for url in urls:
         scrapeCardUrl(url, driver)
     driver.quit()
