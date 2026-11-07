@@ -32,7 +32,7 @@ def scrapeCardUrl(url, driver):
     else:
         if not (name == None or price == None or avgDailySold == None or setName == None):
             cardDatabase.databaseInsert(name.text, price.text, avgDailySold.text, setName.text, url)
-            cardDatabase.dataGet()
+        
         else:
             print("Null Value")
 
@@ -40,4 +40,5 @@ def startScrape(urls):
     driver = webdriver.Firefox(options=options)
     for url in urls:
         scrapeCardUrl(url, driver)
+        print("Finished for URL: " + url)
     driver.quit()

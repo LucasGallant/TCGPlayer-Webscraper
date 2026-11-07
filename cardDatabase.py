@@ -2,7 +2,7 @@ import sqlite3
 
 def databaseInsert(name, price, avgDailySold, setName, url):
 
-    conn = sqlite3.connect("test.db")
+    conn = sqlite3.connect("cardDatabase.db")
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -23,8 +23,8 @@ def databaseInsert(name, price, avgDailySold, setName, url):
     conn.commit()
     conn.close()
 
-def dataGet():
-    conn = sqlite3.connect("test.db")
+def databaseGet():
+    conn = sqlite3.connect("cardDatabase.db")
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM cards")
 
