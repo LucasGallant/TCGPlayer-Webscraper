@@ -14,12 +14,18 @@ def databaseInsert(name, price, avgDailySold, setName, url):
             url TEXT
         )
     """)
-
     cursor.execute(
-        "INSERT INTO cards (name, price, avgSold, setName, url) VALUES (?, ?, ?, ?, ?)",
-        (name, price, avgDailySold, setName, url)
+        "SELECT name FROM cards WHERE name = ? AND setName = ?",
+        (name, setName)
     )
-
+    row = cursor.fetchone()
+    if row:
+        print("Already Exists: " + name)
+    else:
+        cursor.execute(
+            "INSERT INTO cards (name, price, avgSold, setName, url) VALUES (?, ?, ?, ?, ?)",
+            (name, price, avgDailySold, setName, url)
+        )
     conn.commit()
     conn.close()
 

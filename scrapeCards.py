@@ -28,7 +28,7 @@ def scrapeCardUrl(url, driver):
     # exception if no element was found for any of them
     # NEEDS TO BE CHANGED TO CHECK INDIVIDUAL
     except NoSuchElementException:
-        print("Not Found")
+        print("Didnt find for: " + name)
     else:
         if not (name == None or price == None or avgDailySold == None or setName == None):
             cardDatabase.databaseInsert(name.text, price.text, avgDailySold.text, setName.text, url)

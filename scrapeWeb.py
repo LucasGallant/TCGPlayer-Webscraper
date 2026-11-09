@@ -18,7 +18,7 @@ def scrapeFrontPage(url):
     driver.get(url)
 
     try: 
-        WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.XPATH, sortButtonXPATH)))
+        WebDriverWait(driver, 20).until(EC.presence_of_all_elements_located((By.XPATH, sortButtonXPATH)))
         sortButton = driver.find_element(By.XPATH, sortButtonXPATH)
         sortButton.click()
         bestSelling = driver.find_element(By.XPATH, bestSellingXPATH)
@@ -37,6 +37,7 @@ def scrapeFrontPage(url):
     except NoSuchElementException:
         print("Not Found")
         driver.quit()
+        return None
     else:
         print("Found")
         driver.quit()
