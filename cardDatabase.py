@@ -8,7 +8,7 @@ def databaseInsert(name, price, avgDailySold, setName, url):
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS cards (
             name TEXT PRIMARY KEY,
-            price TEXT,
+            price FLOAT,
             avgSold INTEGER,
             setName TEXT,
             url TEXT
@@ -18,9 +18,16 @@ def databaseInsert(name, price, avgDailySold, setName, url):
         "SELECT name FROM cards WHERE name = ? AND setName = ?",
         (name, setName)
     )
-    row = cursor.fetchone()
-    if row:
-        print("Already Exists: " + name)
+    card = cursor.fetchone()
+    if card:
+        cursor.execute(
+            "SELECT price FROM cards WHERE name = ? AND setName = ?",
+            (name, setName)
+        )
+        oldPrice = cursor.fetchone()
+        increasedPrice = price + (price * .5)
+        if oldPrice >= increasedPrice:
+            
     else:
         cursor.execute(
             "INSERT INTO cards (name, price, avgSold, setName, url) VALUES (?, ?, ?, ?, ?)",

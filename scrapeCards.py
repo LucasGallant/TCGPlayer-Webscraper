@@ -28,13 +28,13 @@ def scrapeCardUrl(url, driver):
     # exception if no element was found for any of them
     # NEEDS TO BE CHANGED TO CHECK INDIVIDUAL
     except NoSuchElementException:
-        print("Didnt find for: " + name)
+        print("Didnt find for: " + name.text)
     else:
-        if not (name == None or price == None or avgDailySold == None or setName == None):
-            cardDatabase.databaseInsert(name.text, price.text, avgDailySold.text, setName.text, url)
-        
-        else:
-            print("Null Value")
+        if price:
+            price = price.text
+            price = price.replace("$","")
+            price = float(price)
+        cardDatabase.databaseInsert(name.text, price, avgDailySold.text, setName.text, url)
 
 def startScrape(urls):
     driver = webdriver.Firefox(options=options)
