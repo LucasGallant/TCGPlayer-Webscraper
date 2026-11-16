@@ -34,7 +34,7 @@ def scrapeCardUrl(url, driver):
             price = price.text
             price = price.replace("$","")
             price = float(price)
-        cardDatabase.databaseInsert(name.text, price, avgDailySold.text, setName.text, url)
+        cardDatabase.databaseInsert(url, name.text, price, avgDailySold.text, setName.text)
 
 def startScrape(urls):
     driver = webdriver.Firefox(options=options)
