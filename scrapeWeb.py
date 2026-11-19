@@ -6,8 +6,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 #CSS worked better than XPATH for some reason
 cardUrlCSS = "html body div#app.app-container div div.marketplace section.marketplace__content section.unified-search section section.search-layout-hfb section section.search-results div.search-result div.search-result__content div.search-result__product div.product-card div.product-card__content a"
-sortButtonXPATH = "/html/body/div[2]/div/div/section[2]/section/section/div[2]/div[2]/div[1]/div/div/div[2]/div/div/div"
-bestSellingXPATH = "/html/body/div[2]/div/div/section[2]/section/section/div[2]/div[2]/div[1]/div/div/div[2]/div/div/div/div/div[2]/ul/li[2]/span"
+sortButtonXPATH = "/html/body/div[3]/div/div/section[2]/section/section/div[2]/div[2]/div[1]/div/div/div[2]/div/div/div/div/div[1]"
+bestSellingXPATH = "/html/body/div[3]/div/div/section[2]/section/section/div[2]/div[2]/div[1]/div/div/div[2]/div/div/div/div/div[2]/ul/li[2]/span"
 
 options = webdriver.FirefoxOptions()
 options.add_argument("--headless")
@@ -22,7 +22,7 @@ def getHrefs(driver):
 
 
 def scrapeFrontPage(url):
-    driver = webdriver.Firefox(options=options)
+    driver = webdriver.Firefox()
     try:
         driver.get(url)
         wait = WebDriverWait(driver, 20)

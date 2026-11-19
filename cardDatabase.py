@@ -2,7 +2,9 @@ import sqlite3
 
 def databaseInsert(url, name, price, avgDailySold, setName):
 
-    priceThreshold = 0
+    MAX_CARDS = 50
+    PRICE_THRESHOLD = 10
+
     conn = sqlite3.connect("cardDatabase.db")
     cursor = conn.cursor()
 
@@ -22,13 +24,27 @@ def databaseInsert(url, name, price, avgDailySold, setName):
     newBase = price
 
     if row is not None:
+        #existing card
         newBase = row[0] if row[0] else price  # keep the existing baseline
-        pctChange = (price - newBase) / newBase * 100
+        pctChange = (price - newBase) / newBase * 100 if newBase else 0
+        if abs(pctChange) >= PRICE_THRESHOLD:
+            print("Price Change")
+            newBase = price
+        else:
+            print("Price Goes down")
+            newBase = price
+    else:
+        #non-existing card
+        cursor.execute("SELECT COUNT(*) FROM cards")
+        if cursor.fetchone()[0] >= MAX_CARDS:
+            cursor.execute("SELECT url FROM cards ORDER BY avgSold")
+            row = cursor.fetchone()
+            cursor.execute("DELETE FROM cards WHERE url = ?", row[0])
 
     cursor.execute(
                 """
-                INSERT INTO cards (url, name, price, avgSold, setName) 
-                VALUES (?, ?, ?, ?, ?)
+                INSERT INTO cards (url, name, price, basePrice, avgSold, setName) 
+                VALUES (?, ?, ?, ?, ?, ?)
                 ON CONFLICT(url) DO UPDATE SET
                 name = excluded.name,
                 price = excluded.price,
